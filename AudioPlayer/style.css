@@ -139,7 +139,7 @@ body {
     background: linear-gradient(to right, blue 30%, rgb(7, 142, 179) 70%);
     border-radius: 25px;
     transition: box-shadow 0.3s ease;
-
+    display: inline-flex;
 }
 
 .handle:hover {
@@ -181,10 +181,6 @@ body {
     margin-right: 10px;
 }
 
-.muteButtons img {
-    animation: pulse 1s infinite alternate;
-}
-
 #decrease {
     height: 22px;
     width: 22px;
@@ -205,10 +201,24 @@ body {
     background-size: cover;
     margin: 5px;
 }
-
-
-
-
+.speed-control {
+    display: flex;
+    width: 200px;
+    margin-right: 20px;
+}
+.control {
+    color: rgb(0, 249, 0);
+    animation: neonGlow 1.5s ease-in-out infinite alternate;
+    margin-right: 10px;
+    font-size: 17px;
+}
+#speed {
+    color: white;
+    background-color: black;
+}
+#speed:hover {
+    box-shadow: 0 0 20px rgb(66, 0, 246);
+}
 
 
 

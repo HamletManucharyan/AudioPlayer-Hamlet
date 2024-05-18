@@ -25,46 +25,46 @@ let data = {
 
 let song = new Audio()
 
-window.onload = function(){
+window.onload = function () {
     playSong()
 }
 
 let currentSong = 0
-function playSong(){
-    song.src = data.song[currentSong]
-    console.log(song);
-    let songTitle = document.getElementsByClassName("songTitle")
-    songTitle[0].textContent = data.title[currentSong]
-    let img = document.getElementsByClassName("row1")
-    img[0].style.backgroundImage = "url("+ data.poster[currentSong] +")"
+function playSong() {
+    song.src = data.song[currentSong];
+    let songTitle = document.getElementsByClassName("songTitle");
+    songTitle[0].textContent = data.title[currentSong];
+    let img = document.getElementsByClassName("row1");
+    img[0].style.backgroundImage = "url(" + data.poster[currentSong] + ")";
     let main = document.getElementsByClassName("main")
-    main[0].style.backgroundImage = "url("+ data.poster[currentSong] +")"
+    main[0].style.backgroundImage = "url(" + data.poster[currentSong] + ")";
+    song.play();
 }
 
-function playOrPause(){
+function playOrPause() {
     let play = document.getElementById("play")
-    if(song.paused){
+    if (song.paused) {
         song.play()
         play.src = "images/pause.png"
-    }else{
+    } else {
         song.pause()
         play.src = "images/play-button-arrowhead.png"
     }
 }
 
-song.addEventListener("timeupdate", function(){
+song.addEventListener("timeupdate", function () {
     let fill = document.getElementsByClassName("fill")
     let position = song.currentTime / song.duration
     fill[0].style.marginLeft = position * 100 + "%"
 
     convertTime(song.currentTime)
 
-    if(song.ended){
+    if (song.ended) {
         next()
     }
 })
 
-function convertTime(seconds){
+function convertTime(seconds) {
     currentTime = document.getElementsByClassName("currentTime")
 
     let min = Math.floor(seconds / 60)
@@ -74,12 +74,11 @@ function convertTime(seconds){
     sec = (sec < 10) ? "0" + sec : sec;
 
     currentTime[0].textContent = min + ":" + sec
-    console.log(song.currentTime);
-      
-    totallTime(Math.round(song.duration))
+
+    totalTime(Math.round(song.duration))
 }
 
-function totallTime(seconds){
+function totalTime(seconds) {
     let min = Math.floor(seconds / 60)
     let sec = Math.floor(seconds % 60)
 
@@ -89,27 +88,48 @@ function totallTime(seconds){
     currentTime[0].textContent += "/" + min + ":" + sec
 }
 
-//bag
-// function next() {
-//     currentSong++
+function next() {
+    currentSong++
 
-//     if(currentSong >= data.song.length){
-//         currentSong = 0
-//     }
+    if (currentSong >= data.song.length) {
+        currentSong = 0
+    }
 
-//     playSong()
-//     play.src = "images/pause.png"
-  
-// }
-// function prev(){
-//     currentSong--
+    playSong()
+    play.src = "images/pause.png"
 
-//     if(currentSong < 0){
-//         currentSong = data.song.length - 1
-//     }
+}
+function prev() {
+    currentSong--
 
-//     playSong()
-//     play.src = "images/pause.png"
-// }
+    if (currentSong < 0) {
+        currentSong = data.song.length - 1
+    }
 
+    playSong()
+    play.src = "images/pause.png"
+}
 
+function increase() {
+    song.volume += 0.2;
+}
+
+function decrease() {
+    song.volume -= 0.2
+}
+
+function mute() {
+    let mute = document.getElementById("mute")
+    if (song.muted) {
+        mute.src = "images/volume.png"
+        song.muted = false
+    } else {
+        mute.src = "images/volume-mute.png"
+        song.muted = true
+    }
+
+}
+
+function changeSpeed(speed) {
+    song.playbackRate = parseFloat(speed);
+}
