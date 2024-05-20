@@ -26,7 +26,7 @@ let data = {
 let song = new Audio()
 
 window.onload = function () {
-    playSong()
+    playSong();
 }
 
 let currentSong = 0
@@ -133,3 +133,69 @@ function mute() {
 function changeSpeed(speed) {
     song.playbackRate = parseFloat(speed);
 }
+
+let isDragging = false;
+
+function startDrag(event) {
+    isDragging = true;
+    document.addEventListener('mousemove', drag);
+    document.addEventListener('mouseup', stopDrag);
+}
+
+function drag(event) {
+    if (!isDragging) return;
+
+    const seekBar = document.querySelector('.seek-bar');
+    const handle = document.querySelector('.handle');
+    const fill = document.querySelector('.fill');
+    const rect = seekBar.getBoundingClientRect();
+    const offsetX = event.clientX - rect.left;
+    const barWidth = seekBar.clientWidth;
+    let newPosition = offsetX / barWidth;
+
+    if (newPosition < 0) {
+        newPosition = 0;
+    } else if (newPosition > 1) {
+        newPosition = 1;
+    }
+
+    song.currentTime = song.duration * newPosition;
+}
+
+function stopDrag(event) {
+    if (!isDragging) return;
+
+    isDragging = false;
+    document.removeEventListener('mousemove', drag);
+    document.removeEventListener('mouseup', stopDrag);
+}
+
+document.querySelector('.handle').addEventListener('mousedown', startDrag);
+
+
+document.addEventListener('keydown', function(event) {
+    switch (event.key) {
+        case ' ':
+            playOrPause();
+            break;
+        case 'ArrowRight':
+            next();
+            break;
+        case 'ArrowLeft':
+            prev();
+            break;
+        case 'ArrowUp':
+            increase();
+            break;
+        case 'ArrowDown':
+            decrease();
+            break;
+        case 'm':
+            mute();
+            break;
+    }
+});
+
+
+
+
