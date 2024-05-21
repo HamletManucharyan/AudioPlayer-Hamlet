@@ -34,7 +34,6 @@ body {
 
 .player:hover {
     box-shadow: 0 0 20px rgba(255, 0, 204, 0.7);
-    ;
 }
 
 .row1 {
@@ -220,6 +219,61 @@ body {
     box-shadow: 0 0 20px rgb(66, 0, 246);
 }
 
+.playlist {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    color: white;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.playlist:hover {
+    box-shadow: 0 0 20px rgba(255, 0, 204, 0.7);
+}
+
+.playlist h2 {
+    text-align: center;
+}
+
+.playlist ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.playlist ul li {
+    padding: 5px;
+    cursor: pointer;
+}
+
+.playlist ul li:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.playlist input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 5px;
+}
+
+.playlist button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.playlist button:hover {
+    background-color: #45a049;
+}
 
 
 

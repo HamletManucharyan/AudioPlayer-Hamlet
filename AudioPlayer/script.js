@@ -22,47 +22,87 @@ let data = {
     ]
 }
 
-
-let song = new Audio()
+let song = new Audio();
+let currentSong = 0;
 
 window.onload = function () {
+    loadPlaylist();
     playSong();
 }
 
-let currentSong = 0
+function loadPlaylist() {
+    const playlistElement = document.getElementById('playlist');
+    playlistElement.innerHTML = '';
+    for (let i = 0; i < data.title.length; i++) {
+        const li = document.createElement('li');
+        li.textContent = data.title[i];
+        li.onclick = () => selectSong(i);
+        playlistElement.appendChild(li);
+    }
+}
+
+function selectSong(index) {
+    currentSong = index;
+    play.src = "images/pause.png"
+    playSong();
+}
+
+function addSong() {
+    const titleInput = document.getElementById('songTitleInput');
+    const urlInput = document.getElementById('songUrlInput');
+    const posterInput = document.getElementById('songPosterInput');
+
+    const newTitle = titleInput.value;
+    const newUrl = urlInput.value;
+    const newPoster = posterInput.value;
+
+    if (newTitle && newUrl && newPoster) {
+        data.title.push(newTitle);
+        data.song.push(newUrl);
+        data.poster.push(newPoster);
+
+        loadPlaylist();
+
+        titleInput.value = '';
+        urlInput.value = '';
+        posterInput.value = '';
+    } else {
+        alert('Please fill in all fields');
+    }
+}
+
 function playSong() {
     song.src = data.song[currentSong];
-    let songTitle = document.getElementsByClassName("songTitle");
-    songTitle[0].textContent = data.title[currentSong];
+    document.getElementsByClassName("songTitle")[0].textContent = data.title[currentSong];
     let img = document.getElementsByClassName("row1");
     img[0].style.backgroundImage = "url(" + data.poster[currentSong] + ")";
-    let main = document.getElementsByClassName("main")
+    let main = document.getElementsByClassName("main");
     main[0].style.backgroundImage = "url(" + data.poster[currentSong] + ")";
     song.play();
 }
 
 function playOrPause() {
-    let play = document.getElementById("play")
+    let play = document.getElementById("play");
     if (song.paused) {
-        song.play()
-        play.src = "images/pause.png"
+        song.play();
+        play.src = "images/pause.png";
     } else {
-        song.pause()
-        play.src = "images/play-button-arrowhead.png"
+        song.pause();
+        play.src = "images/play-button-arrowhead.png";
     }
 }
 
 song.addEventListener("timeupdate", function () {
-    let fill = document.getElementsByClassName("fill")
-    let position = song.currentTime / song.duration
-    fill[0].style.marginLeft = position * 100 + "%"
+    let fill = document.getElementsByClassName("fill");
+    let position = song.currentTime / song.duration;
+    fill[0].style.marginLeft = position * 100 + "%";
 
-    convertTime(song.currentTime)
+    convertTime(song.currentTime);
 
     if (song.ended) {
-        next()
+        next();
     }
-})
+});
 
 function convertTime(seconds) {
     currentTime = document.getElementsByClassName("currentTime")
