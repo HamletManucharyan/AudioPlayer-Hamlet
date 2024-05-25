@@ -30,47 +30,6 @@ window.onload = function () {
     playSong();
 }
 
-function loadPlaylist() {
-    const playlistElement = document.getElementById('playlist');
-    playlistElement.innerHTML = '';
-    for (let i = 0; i < data.title.length; i++) {
-        const li = document.createElement('li');
-        li.textContent = data.title[i];
-        li.onclick = () => selectSong(i);
-        playlistElement.appendChild(li);
-    }
-}
-
-function selectSong(index) {
-    currentSong = index;
-    play.src = "images/pause.png"
-    playSong();
-}
-
-function addSong() {
-    const titleInput = document.getElementById('songTitleInput');
-    const urlInput = document.getElementById('songUrlInput');
-    const posterInput = document.getElementById('songPosterInput');
-
-    const newTitle = titleInput.value;
-    const newUrl = urlInput.value;
-    const newPoster = posterInput.value;
-
-    if (newTitle && newUrl && newPoster) {
-        data.title.push(newTitle);
-        data.song.push(newUrl);
-        data.poster.push(newPoster);
-
-        loadPlaylist();
-
-        titleInput.value = '';
-        urlInput.value = '';
-        posterInput.value = '';
-    } else {
-        alert('Please fill in all fields');
-    }
-}
-
 function playSong() {
     song.src = data.song[currentSong];
     document.getElementsByClassName("songTitle")[0].textContent = data.title[currentSong];
@@ -236,6 +195,43 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
+function loadPlaylist() {
+    const playlistElement = document.getElementById('playlist');
+    playlistElement.innerHTML = '';
+    for (let i = 0; i < data.title.length; i++) {
+        const li = document.createElement('li');
+        li.textContent = data.title[i];
+        li.onclick = () => selectSong(i);
+        playlistElement.appendChild(li);
+    }
+}
 
+function selectSong(index) {
+    currentSong = index;
+    play.src = "images/pause.png"
+    playSong();
+}
 
+function addSong() {
+    const titleInput = document.getElementById('songTitleInput');
+    const urlInput = document.getElementById('songUrlInput');
+    const posterInput = document.getElementById('songPosterInput');
 
+    const newTitle = titleInput.value;
+    const newUrl = urlInput.value;
+    const newPoster = posterInput.value;
+
+    if (newTitle && newUrl && newPoster) {
+        data.title.push(newTitle);
+        data.song.push(newUrl);
+        data.poster.push(newPoster);
+
+        loadPlaylist();
+
+        titleInput.value = '';
+        urlInput.value = '';
+        posterInput.value = '';
+    } else {
+        alert('Please fill in all fields');
+    }
+}

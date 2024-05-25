@@ -21,9 +21,9 @@ body {
 .player {
     background-color: rgba(8, 73, 21, 0.486);
     position: absolute;
-    transform: translate(-50%);
+    transform: translate(-100%);
     top: 50%;
-    left: 50%;
+    left: 45%;
     height: 350px;
     width: 400px;
     border-radius: 25px;
@@ -207,7 +207,7 @@ body {
 }
 .control {
     color: rgb(0, 249, 0);
-    animation: neonGlow 1.5s ease-in-out infinite alternate;
+    animation: neonGlow 1.5s infinite alternate;
     margin-right: 10px;
     font-size: 17px;
 }
@@ -223,11 +223,13 @@ body {
     background-color: rgba(0, 0, 0, 0.7);
     padding: 20px;
     border-radius: 10px;
-    margin-top: 20px;
     color: white;
     width: 400px;
-    margin-left: auto;
-    margin-right: auto;
+    position: absolute;
+    transform: translate(50%);
+    top: 45%;
+    left: 45%;
+    overflow: hidden;
 }
 
 .playlist:hover {
@@ -236,6 +238,8 @@ body {
 
 .playlist h2 {
     text-align: center;
+    color: rgb(0, 249, 0);
+    animation: pulse 1s infinite alternate, neonGlow 1.5s ease-in-out infinite alternate;
 }
 
 .playlist ul {
@@ -269,13 +273,14 @@ body {
     color: white;
     font-size: 16px;
     cursor: pointer;
+    margin-top: 10px;
+    animation: neonGlow 1.5s ease-in-out infinite alternate;
 }
 
 .playlist button:hover {
     background-color: #45a049;
+    color: #563cff;
 }
-
-
 
 
 
